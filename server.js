@@ -32,4 +32,22 @@ app.get("/", function(req, res) {
 
 });
 
+app.get("/", function(req, res) {
+    res.render("sortable.mustache", {
+        people: [
+            {
+                artistname: "Dean Martin",
+                popularity: 10
+            },
+            {
+                artistname: "Johhny Cash",
+                popularity: 22
+            }
+        ]
+    });
+
+});
+
+
+
 app.listen(8080);
