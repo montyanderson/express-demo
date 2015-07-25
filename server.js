@@ -4,14 +4,32 @@ var fs = require("fs"),
 
 var app = express();
 
-app.get("/", function(req, res) {
-    fs.readFile(__dirname + "/index.mustache", function(err, data) {
-        var html = mustache.render(data.toString(), {
-            name: "Jacob"
-        });
+app.engine("mustache", function(filePath, options, callback) {
+    fs.readFile(filePath, function(err, data) {
+        if (err) return callback(new Error(err));
 
-        res.end(html);
+        var html = mustache.render(data.toString(), options);
+        return callback(null, html);
+    })
+});
+
+app.set("views", "./views");
+app.set("view engine", "mustache");
+
+app.get("/", function(req, res) {
+    res.render("index.mustache", {
+        people: [
+            {
+                firstname: "Jacob",
+                lastname: "Cons"
+            },
+            {
+                firstname: "Monty",
+                lastname: "Anderson"
+            }
+        ]
     });
+
 });
 
 app.listen(8080);
