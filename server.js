@@ -1,6 +1,5 @@
 var fs = require("fs"),
-    express = require("express"),
-    mustache = require("mustache");
+    express = require("express");
 
 var app = express();
 
@@ -28,7 +27,7 @@ app.get("/", function(req, res) {
 
 });
 
-app.get("/", function(req, res) {
+app.get("/sortable", function(req, res) {
     res.render("sortable.mustache", {
         people: [
             {
