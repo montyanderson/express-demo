@@ -10,6 +10,8 @@ app.engine("mustache", engine);
 app.set("views", "./views");
 app.set("view engine", "mustache");
 
+app.use(express.static("public"));
+
 app.get("/", function(req, res) {
     res.render("index.mustache", {
         people: [
